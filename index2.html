@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-align: center
+        }
+
+        .dropcr {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            margin: 0 auto;
+            position: fixed;
+            top: 00px;
+            border-radius: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        p {
+            padding-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="dropcr">刷</div>
+    </div>
+    <div>
+        <p>--------------------------------------------</p>
+        <div class="dropup">此为下拉刷新</div>
+        <div class="isAjax"></div>
+    </div>
+</body>
+<script src="https://f.51fanbei.com/h5/static/jquery-2.2.4.min.js"></script>
+<script src="https://f.51fanbei.com/h5/static/vue.min.js"></script>
+<script>
+    $(function () {
+        // 开始的位置
+        let movesta = 0;
+        // 运动的位置
+        let movemve = 0;
+        // 结束后的位置
+        let moveend = 0;
+        // 开启节流阀
+        let flag = false;
+        // 是否ajax
+        let huiTop = 0;
+        console.log($('.dropcr').css('top'))
+        window.addEventListener('touchstart', function (event) {
+            movesta = event.targetTouches[0].clientY
+            console.log(movesta)
+            if (flag) {
+                // 动画执行完毕
+                $('.dropcr').css({
+                    top: -30
+                })
+            } else {
+                //动画没有执行完毕
+                $('.dropcr').stop(true)
+                moveend = parseInt($('.dropcr').css('top'))
+                console.log($('.dropcr').css('top'))
+                $('.dropcr').css({
+                    top: $('.dropcr').css('top')
+                })
+            }
+        });
+        window.addEventListener('touchmove', function (event) {
+            $('.dropup').html('正在下拉')
+            movemve = event.targetTouches[0].clientY
+            console.log(movemve)
+            huiTop = flag ? movemve - movesta : movemve - movesta + moveend;
+            huiTop = huiTop < 100 ? huiTop : 100
+            $('.dropcr').css({
+                top: huiTop,
+                'transform': ' translateX(-50%) rotate(' + (movemve - movesta) + 'deg)',
+            })
+
+        })
+        window.addEventListener('touchend', function (event) {
+            flag = false;
+            moveend = parseInt($('.dropcr').css('top'))
+            if (huiTop == 100) {
+                $('.dropup').html('ajax请求中')
+                setTimeout(() => {
+
+                    $('.dropcr').animate({
+                        top: 0,
+                    }, 800, 'swing', function () {
+                        flag = true;
+                        $('.dropup').html('此为下拉刷新')
+                        console.log('动画执行完毕')
+                    })
+                }, 1000);
+            } else {
+                $('.dropup').html('此为下拉刷新')
+                $('.dropcr').animate({
+                    top: 0,
+                }, 800, 'swing', function () {
+                    flag = true;
+                    console.log('动画执行完毕')
+                })
+            }
+
+
+        })
+    })
+</script>
+
+</html>
