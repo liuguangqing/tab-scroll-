@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lq_滚动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            width: 100%;
+            overflow: scroll;
+        }
+
+        ul {
+            width: max-content;
+        }
+
+        h1 {
+            font-size: 30px
+        }
+
+        li {
+            float: left;
+            height: 50px;
+            line-height: 50px;
+            width: 80px;
+            border: 1px solid red;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        div {
+            height: 200px;
+            background-color: #f0f0f0; 
+            overflow: scroll;
+            margin-top: 20px
+        }
+        .cas{
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+    <main id="app">
+        <header id="lq_tab">
+            <ul class="clearfix">
+                <li 
+                :class="a== inaa?'cas':''" 
+                v-for="(items,inaa) in weth.data.forecast" 
+                v-text="items.type+inaa"
+                @click="check(inaa)"></li>
+            </ul>
+        </header>
+        <div id="lq_scroll">
+            <dl v-for="(iteman,inx) in weth.data.forecast" :id="'lq_title'+inx">
+                <dt>
+                    <h1>{{iteman.type}}--{{inx}}</h1>
+                </dt>
+                <dd>
+                    <p>{{iteman.aqi}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.date}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.fl}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.fx}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.high}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.low}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.notice}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.sunrise}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.sunset}}</p>
+                </dd>
+                <dd>
+                    <p>{{iteman.type}}</p>
+                </dd>
+            </dl>
+        </div>
+
+    </main>
+
+</body>
+<script src="https://f.51fanbei.com/h5/static/jquery-2.2.4.min.js"></script>
+<script src="https://f.51fanbei.com/h5/static/vue.min.js"></script>
+<script>
+    $(function () {
+        // div 是容器 、  header 是tab栏 、  #moun 是每个商品的表头
+        let vms = new Vue({
+            el: '#app',
+            data: {
+                a:0,
+            scrollmun:0,
+                weth: {
+                    "data": {
+                        "shidu": "34%",
+                        "pm25": 73,
+                        "pm10": 91,
+                        "quality": "良",
+                        "wendu": "5",
+                        "ganmao": "极少数敏感人群应减少户外活动",
+                        "yesterday": {
+                            "date": "21日星期三",
+                            "sunrise": "06:19",
+                            "high": "高温 11.0℃",
+                            "low": "低温 1.0℃",
+                            "sunset": "18:26",
+                            "aqi": 85,
+                            "fx": "南风",
+                            "fl": "<3级",
+                            "type": "多云",
+                            "notice": "阴晴之间，谨防紫外线侵扰"
+                        },
+                        "forecast": [{
+                                "date": "22日星期四",
+                                "sunrise": "06:17",
+                                "high": "高温 17.0℃",
+                                "low": "低温 1.0℃",
+                                "sunset": "18:27",
+                                "aqi": 98,
+                                "fx": "西南风",
+                                "fl": "<3级",
+                                "type": "晴",
+                                "notice": "愿你拥有比阳光明媚的心情"
+                            },
+                            {
+                                "date": "23日星期五",
+                                "sunrise": "06:16",
+                                "high": "高温 18.0℃",
+                                "low": "低温 5.0℃",
+                                "sunset": "18:28",
+                                "aqi": 118,
+                                "fx": "无持续风向",
+                                "fl": "<3级",
+                                "type": "多云",
+                                "notice": "阴晴之间，谨防紫外线侵扰"
+                            },
+                            {
+                                "date": "24日星期六",
+                                "sunrise": "06:14",
+                                "high": "高温 21.0℃",
+                                "low": "低温 7.0℃",
+                                "sunset": "18:29",
+                                "aqi": 52,
+                                "fx": "西南风",
+                                "fl": "<3级",
+                                "type": "晴",
+                                "notice": "愿你拥有比阳光明媚的心情"
+                            },
+                            {
+                                "date": "25日星期日",
+                                "sunrise": "06:13",
+                                "high": "高温 22.0℃",
+                                "low": "低温 7.0℃",
+                                "sunset": "18:30",
+                                "aqi": 71,
+                                "fx": "西南风",
+                                "fl": "<3级",
+                                "type": "晴",
+                                "notice": "愿你拥有比阳光明媚的心情"
+                            },
+                            {
+                                "date": "26日星期一",
+                                "sunrise": "06:11",
+                                "high": "高温 21.0℃",
+                                "low": "低温 8.0℃",
+                                "sunset": "18:31",
+                                "aqi": 97,
+                                "fx": "西南风",
+                                "fl": "<3级",
+                                "type": "多云",
+                                "notice": "阴晴之间，谨防紫外线侵扰"
+                            },
+                            {
+                                "date": "26日星期一",
+                                "sunrise": "06:11",
+                                "high": "高温 21.0℃",
+                                "low": "低温 8.0℃",
+                                "sunset": "18:31",
+                                "aqi": 97,
+                                "fx": "西南风",
+                                "fl": "<3级",
+                                "type": "多云",
+                                "notice": "阴晴之间，谨防紫外线侵扰"
+                            },
+                            {
+                                "date": "26日星期一",
+                                "sunrise": "06:11",
+                                "high": "高温 21.0℃",
+                                "low": "低温 8.0℃",
+                                "sunset": "18:31",
+                                "aqi": 97,
+                                "fx": "西南风",
+                                "fl": "<3级",
+                                "type": "多云",
+                                "notice": "阴晴之间，谨防紫外线侵扰"
+                            }
+                        ]
+                    }
+                }
+            },
+            methods: {
+                check:function(i){
+                    let that = this 
+                    $('#lq_scroll').animate({scrollTop:that.scrollmun+($('#lq_title'+i).offset().top-72)},600,'swing')
+                    that.scrollmun = that.scrollmun+($('#lq_title'+i).offset().top-72)
+                }
+            },
+            mounted () {
+                let that = this
+                $('#lq_scroll').scroll(function () {
+                    for (let i = 0; i < that.weth.data.forecast.length; i++) {
+                        if($('#lq_title'+i).offset().top - 72 <= $('#lq_scroll').height() / 2 ){
+                            that.a = i
+                            if(i >= 4){ 
+                                $('#lq_tab').scrollLeft(220)
+                            }else{
+                                $('#lq_tab').scrollLeft(00)
+                            }
+                        }                      
+                    }
+                })
+            }
+        })
+    })
+</script>
+
+</html>
