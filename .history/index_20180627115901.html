@@ -37,12 +37,11 @@
 
         div {
             height: 200px;
-            background-color: #f0f0f0;
+            background-color: #f0f0f0; 
             overflow: scroll;
             margin-top: 20px
         }
-
-        .cas {
+        .cas{
             color: red
         }
     </style>
@@ -52,7 +51,11 @@
     <main id="app">
         <header id="lq_tab">
             <ul class="clearfix">
-                <li :class="a== inaa?'cas':''" v-for="(items,inaa) in weth.data.forecast" v-text="items.type+inaa" @click="check(inaa)"></li>
+                <li 
+                :class="a== inaa?'cas':''" 
+                v-for="(items,inaa) in weth.data.forecast" 
+                v-text="items.type+inaa"
+                @click="check(inaa)"></li>
             </ul>
         </header>
         <div id="lq_scroll">
@@ -104,8 +107,8 @@
         let vms = new Vue({
             el: '#app',
             data: {
-                a: 0,
-                scrollmun: 0,
+                a:0,
+            scrollmun:0,
                 weth: {
                     "data": {
                         "shidu": "34%",
@@ -215,41 +218,24 @@
                 }
             },
             methods: {
-                check: function (i) {
-                    let that = this
-                    $('#lq_scroll').animate({
-                        scrollTop: that.scrollmun + ($('#lq_title' + i).offset().top - 72)
-                    }, 600, 'swing')
-                    that.scrollmun = that.scrollmun + ($('#lq_title' + i).offset().top - 72)
+                check:function(i){
+                    let that = this 
+                    $('#lq_scroll').animate({scrollTop:that.scrollmun+($('#lq_title'+i).offset().top-72)},600,'swing')
+                    that.scrollmun = that.scrollmun+($('#lq_title'+i).offset().top-72)
                 }
             },
-            mounted() {
+            mounted () {
                 let that = this
                 $('#lq_scroll').scroll(function () {
                     for (let i = 0; i < that.weth.data.forecast.length; i++) {
-                        if ($('#lq_title' + i).offset().top - 72 <= $('#lq_scroll').height() /
-                            2) {
+                        if($('#lq_title'+i).offset().top - 72 <= $('#lq_scroll').height() / 2 ){
                             that.a = i
-                            if (i >= 4) {
+                            if(i >= 4){ 
                                 $('#lq_tab').scrollLeft(220)
-                            } else {
+                            }else{
                                 $('#lq_tab').scrollLeft(00)
                             }
-                        }
-                    }
-                });
-                $.ajax({
-                    url: 'http://v.juhe.cn/weather/index',
-                    type: 'get',
-                    data: {
-                        cityname: '深圳',
-                        dtype: 'json',
-                        format: '1',
-                        key: '60aa286d976e7c37ce9407875ef766b1'
-                    },
-                    dataType: 'jsonp',
-                    success: function (res) {
-                        console.log(res);
+                        }                      
                     }
                 })
             }
