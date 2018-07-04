@@ -1,0 +1,85 @@
+* {
+    text-align: center;
+    margin: 0 ;
+    padding: 0;
+}
+body{
+    display: none;
+}
+.section{
+    position: relative;
+}
+.twocon,.onecon {
+    /* left: 200px; */
+    opacity: 0;
+    transition: all 1s ;
+    transform: scale(10)
+}
+.tns_scale_15{
+    opacity: 1;
+    transform: scale(2)
+}
+@keyframes rotates{
+    0%{
+        transform: rotate(0deg)
+    }
+    50%{
+        transform: rotate(360deg)
+    }
+}
+.onescreen{
+    background-color: #fff;
+    .contain {
+        div {
+            position: absolute;
+            height: 100px ;
+            width: 100px ;
+            background-color: red;
+            
+        }
+        & > div:nth-of-type(odd){
+            top: 20px;
+            left: calc(50%-2);
+            transform: translateX(-100%)
+        }
+        & > div:nth-of-type(even){
+            left: calc(50%+2);
+            top: 20px;
+        }
+        & > div:nth-of-type(n+3){
+            top: 135px;
+        }
+        & > div:nth-of-type(4){
+            border-radius: 100%;
+            transform: rotate(0deg);
+            transition: transform 1s ;
+            animation: 
+        }
+    }
+}
+// #dowebok > div:nth-of-type(1){
+//     background: url('https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=1d071b503501213fd03348dc64e636f8/fc1f4134970a304eb5088f73ddc8a786c9175c14.jpg') no-repeat center center / cover;
+
+// }
+// #dowebok > div:nth-of-type(2){
+//     background: url('https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=1bc340c50e087bf462ec51e9c2d2575e/37d3d539b6003af33cd1a3ee392ac65c1138b6d0.jpg') no-repeat center center / cover ;
+
+// }
+// #dowebok > div:nth-of-type(3){
+//     background: url('https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=4ea14b842a9759ee555066cb82fa434e/0dd7912397dda144eb6f433bbeb7d0a20df486d0.jpg') no-repeat center center / cover ;
+    
+// }
+// #dowebok > div:nth-of-type(4){
+//     background: url('https://f.51fanbei.com/h5/app/activity/2018/06/huanmeiresist_bg.png') no-repeat center center / cover ;
+    
+// }
+a{
+    position: fixed;
+    bottom: 20px ;
+    right: 20px ;
+    width: 20px ;
+    height: 20px ;
+    background-color: red ;
+    z-index: 99;
+    border-radius: 100%;
+}
